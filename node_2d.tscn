@@ -1,17 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfm46jyc6gku2"]
+[gd_scene load_steps=4 format=3 uid="uid://bfm46jyc6gku2"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y32ns"]
-radius = 55.0
-height = 128.0
+[ext_resource type="Texture2D" uid="uid://crwelkib8wcag" path="res://icon.svg" id="1_wtcfe"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0e48y"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_epypp"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(2, 0)
+scale = Vector2(4.5715446, 0.865966)
+disable_mode = 1
+up_direction = Vector2(0.09950372, -0.99503714)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(497, -5)
-shape = SubResource("CapsuleShape2D_y32ns")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, -1.1547798)
+shape = SubResource("CapsuleShape2D_0e48y")
+
+[node name="Icon" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(-0.43748903, -20.786041)
+scale = Vector2(0.1034962, 0.7246357)
+texture = ExtResource("1_wtcfe")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(488, -13)
+position = Vector2(-1, 1)
 scale = Vector2(6.7858143, 1.766613)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(-108.34956, 93)
+rotation = 3.1415927
+scale = Vector2(198.22586, -19.23907)
+mesh = SubResource("BoxMesh_epypp")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
+position = Vector2(-108.34956, 93)
+rotation = 3.1415927
+scale = Vector2(198.22586, -19.23907)
+mesh = SubResource("BoxMesh_epypp")
