@@ -4,6 +4,7 @@ var jumped = 0
 var moved = 0
 var t = 0.0
 var startingposition:Vector2
+var walkfinished = true
 
 
 func _physics_process(delta: float) -> void:
@@ -48,14 +49,18 @@ func _physics_process(delta: float) -> void:
 			
 	#animasyon
 	if jumped == 0 and moved == 0 and is_on_floor():
-		if ($AnimatedSprite2D.animation == "walk" and $AnimatedSprite2D.animation_finished) or $AnimatedSprite2D.animation != "walk":
+		if walkfinished:
 			$AnimatedSprite2D.play("idle")
 	elif jumped != 0:
 		if moved != 0:
 			$AnimatedSprite2D.play("walk")
-		elif ($AnimatedSprite2D.animation == "walk" and $AnimatedSprite2D.animation_finished) or $AnimatedSprite2D.animation != "walk":
+			walkfinished = false
+		elif walkfinished:
 			$AnimatedSprite2D.play("idle") #burada jump animasyonu olacak
 	elif moved != 0:
 			$AnimatedSprite2D.play("walk")
+			walkfinished = false
+	if $AnimatedSprite2D.animation == "walk" and $AnimatedSprite2D.frame >= 6:
+		walkfinished = true
 
 	move_and_slide()
