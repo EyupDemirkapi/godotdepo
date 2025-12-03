@@ -4,6 +4,8 @@ var walkfinished = true
 var jumpfinished = true
 #var onDoor = false
 var onDoor = true
+var xSpeed = 0.0
+var ySpeed = 0.0
 
 func _physics_process(delta: float) -> void:
 	$Label.text = "X velocity: "+str(velocity.x) + "\nY velocity: " + str(velocity.y)
@@ -18,33 +20,36 @@ func _physics_process(delta: float) -> void:
 	
 	
 	#hareket
+	if is_on_ceiling() and ySpeed < 0:
+		ySpeed = 0
 	if is_on_floor():
 		if $AnimatedSprite2D.animation == "jump":
 			$AnimatedSprite2D.play("land")
-		velocity.y = 0
+		ySpeed = 0
 		if Input.is_action_just_pressed("Jump"):
 			jumpfinished = false
 			$AnimatedSprite2D.play("jumpstart")
-			velocity.y-=300
+			ySpeed -= 300
 	else:
-		velocity.y += 10
-	if Input.is_action_pressed("MoveLeft") and abs(velocity.x) < 225:
+		ySpeed += 10
+	if Input.is_action_pressed("MoveLeft") and abs(xSpeed) < 225:
 		if jumpfinished:
 			$AnimatedSprite2D.play("walk")
 		walkfinished = false
 		$AnimatedSprite2D.flip_h = true
-		velocity.x = -225
-	elif Input.is_action_pressed("MoveRight") and abs(velocity.x) < 225:
+		xSpeed = -225
+	elif Input.is_action_pressed("MoveRight") and abs(xSpeed) < 225:
 		if jumpfinished:
 			$AnimatedSprite2D.play("walk")
 		walkfinished = false
 		$AnimatedSprite2D.flip_h = false
-		velocity.x = 225
+		xSpeed = 225
 	else:
-		if abs(velocity.x) > 1:
-			velocity.x /= 1.25
+		if abs(xSpeed) > 1:
+			xSpeed /= 1.25
 		else:
-			velocity.x=0
+			xSpeed=0
+	velocity = Vector2(xSpeed,ySpeed)
 	move_and_slide()
 	
 	
