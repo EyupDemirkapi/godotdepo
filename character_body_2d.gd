@@ -1,9 +1,20 @@
 extends CharacterBody2D
 
 var walkfinished = true
-
+#var onDoor = false
+var onDoor = true
 
 func _physics_process(delta: float) -> void:
+	#iceri disari cikma
+	if Input.is_action_just_pressed("GroundSwap") and onDoor:
+		set_collision_layer_value(1, not get_collision_layer_value(1))
+		set_collision_layer_value(2, not get_collision_layer_value(2))
+		set_collision_mask_value(1, not get_collision_mask_value(1))
+		set_collision_mask_value(2, not get_collision_mask_value(2))
+		$/root/game/ExteriorTileMap.visible = not $/root/game/ExteriorTileMap.visible
+		$/root/game/InteriorTileMap.visible = not $/root/game/InteriorTileMap.visible
+	
+	#hareket
 	if is_on_floor():
 		velocity.y = 0
 		if Input.is_action_just_pressed("ui_up"):
