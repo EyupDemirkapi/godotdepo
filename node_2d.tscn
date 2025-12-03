@@ -7,8 +7,8 @@
 [node name="game" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-112, 112)
-scale = Vector2(6.7858143, 1.766613)
+position = Vector2(1, -1)
+zoom = Vector2(3, 3)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_wtcfe")]
 
