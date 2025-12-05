@@ -6,6 +6,8 @@ var inputDir
 var xSpeed = 0.0
 var ySpeed = 0.0
 @onready var sprite = $AnimatedSprite2D
+@onready var checker = $GroundChecker
+var jumpBuffer = 0
 
 func _physics_process(delta: float) -> void:
 	#$Label.text = "X velocity: "+str(velocity.x) + "\nY velocity: " + str(velocity.y)	
@@ -14,14 +16,23 @@ func _physics_process(delta: float) -> void:
 	if is_on_ceiling() and ySpeed < 0:
 		ySpeed = 0
 	if is_on_floor():
+		jumpBuffer = 0.2
 		if sprite.animation == "jump":
 			sprite.play("land")
 		ySpeed = 0
 		if Input.is_action_pressed("Jump"):
+			jumpBuffer = 0
 			jumpfinished = false
 			sprite.play("jumpstart")
 			ySpeed -= 310
 	else:
+		if jumpBuffer > 0:
+			jumpBuffer -= delta
+			if Input.is_action_pressed("Jump"):
+				jumpBuffer = 0
+				jumpfinished = false
+				sprite.play("jumpstart")
+				ySpeed -= 310
 		ySpeed += 10
 	inputDir = Input.get_axis("MoveLeft","MoveRight")
 	if inputDir != 0:

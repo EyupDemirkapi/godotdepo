@@ -1,6 +1,6 @@
 [gd_scene load_steps=35 format=3 uid="uid://b3gfvdnqrfvf6"]
 
-[ext_resource type="Script" uid="uid://dwny3mqlbkrv6" path="res://Scripts/character_body_2d.gd" id="1_ij6vw"]
+[ext_resource type="Script" uid="uid://dwny3mqlbkrv6" path="res://Scripts/Player.gd" id="1_ij6vw"]
 [ext_resource type="Texture2D" uid="uid://bo002nr2kqyog" path="res://Sprites/vampir.png" id="2_ghijl"]
 [ext_resource type="Script" uid="uid://20o42ts6rb8w" path="res://Scripts/Sky.gd" id="3_5ixxa"]
 [ext_resource type="Texture2D" uid="uid://xocaa6b4ccca" path="res://Sprites/ay.png" id="3_dewec"]
@@ -258,14 +258,17 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+z_index = -15
 position = Vector2(1, -1)
 zoom = Vector2(3, 3)
 script = ExtResource("3_5ixxa")
 
 [node name="Moon" type="Sprite2D" parent="Camera2D"]
+z_index = -10
 position = Vector2(-126, -90)
 texture = ExtResource("3_dewec")
 
 [node name="Sun" type="Sprite2D" parent="Camera2D"]
+z_index = -10
 position = Vector2(127, 90)
 texture = ExtResource("4_5ixxa")
