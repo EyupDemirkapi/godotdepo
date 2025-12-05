@@ -6,7 +6,7 @@ var day = false
 var daytimer = 0
 @onready var moon = $Moon
 @onready var sun = $Sun
-const DAYLENGTH = 10
+const DAYLENGTH = 100
 const YVALUE = 60
 var alphatimer
 
