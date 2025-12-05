@@ -27,7 +27,10 @@ func _physics_process(delta:float) -> void:
 			else:
 				get_tree().create_tween().tween_property(exterior,"modulate:a",1.0,0.1)
 				get_tree().create_tween().tween_property(interior,"modulate:a",0.0,0.1)
-			$/root/Game/Player/AnimatedSprite2D.scale /= 0.8
+			if $/root/Game/Player/AnimatedSprite2D.scale < Vector2.ONE:
+				$/root/Game/Player/AnimatedSprite2D.scale /= 0.8
+			else:
+				$/root/Game/Player/AnimatedSprite2D.scale = Vector2.ONE
 		else:
 			turned = false
 			$/root/Game/Player/AnimatedSprite2D.scale = Vector2.ONE #nolur nolmaz

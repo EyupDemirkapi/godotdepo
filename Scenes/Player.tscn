@@ -258,17 +258,17 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-z_index = -15
+z_index = -10
 position = Vector2(1, -1)
 zoom = Vector2(3, 3)
 script = ExtResource("3_5ixxa")
 
 [node name="Moon" type="Sprite2D" parent="Camera2D"]
-z_index = -10
+z_index = 1
 position = Vector2(-126, -90)
 texture = ExtResource("3_dewec")
 
 [node name="Sun" type="Sprite2D" parent="Camera2D"]
-z_index = -10
+z_index = 1
 position = Vector2(127, 90)
 texture = ExtResource("4_5ixxa")

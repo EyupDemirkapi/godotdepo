@@ -1,6 +1,6 @@
 extends Camera2D
 var rect = Rect2(Vector2(-191,-109),DisplayServer.window_get_size())
-var color = Color(0.025, 0.081, 0.181, 1.0)
+var color = Color(0.029, 0.01, 0.141, 1.0)
 var lerpcolor
 var day = false
 var daytimer = 0
@@ -12,7 +12,7 @@ var alphatimer
 
 func _physics_process(delta: float) -> void:
 	alphatimer = ((daytimer - 0.5)**2)*-4 + 1
-	if color.r <= 0.026:
+	if color.r <= 0.029:
 		sun.position.x *= -1
 		moon.position.x *= -1
 		day = false
@@ -30,7 +30,7 @@ func _physics_process(delta: float) -> void:
 	if day:
 		moon.position.y = lerp(YVALUE,-YVALUE*2,daytimer)
 		sun.position.y = lerp(-YVALUE*2,YVALUE,daytimer)
-		color = lerpcolor.lerp(Color(0.025, 0.081, 0.181, 1.0),daytimer)
+		color = lerpcolor.lerp(Color(0.029, 0.01, 0.141, 1.0),daytimer)
 	else:
 		moon.position.y = lerp(-YVALUE*2,YVALUE,daytimer)
 		sun.position.y = lerp(YVALUE,-YVALUE*2,daytimer)
