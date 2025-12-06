@@ -81,14 +81,17 @@ func _physics_process(delta: float) -> void:
 
 
 func jump(bufferAmount, currentBuffer) -> void:
-	if Input.is_action_pressed("Jump") and attackfinished:
+	if Input.is_action_pressed("Jump"):
 		jumpfinished = false
-		sprite.play("JumpStart")
-		ySpeed -= 310 + bufferAmount / (int(15 * currentBuffer)+1)
+		if attackfinished:
+			sprite.play("JumpStart")
+			ySpeed -= 310 + bufferAmount / (int(15 * currentBuffer)+1)
+		else:
+			ySpeed -= 200 + bufferAmount / (int(15 * currentBuffer)+1)
 		jumpBuffer = 0
 		
 func attack() -> void:
-	if Input.is_action_pressed("Attack"):
+	if Input.is_action_pressed("Attack") and attackfinished:
 		attackfinished = false
 		sprite.play("AttackStart")
 		attackTimer = 0.65
