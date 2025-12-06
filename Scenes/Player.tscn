@@ -334,6 +334,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 physics_interpolation_mode = 2
+z_index = 2
 disable_mode = 2
 script = ExtResource("1_ij6vw")
 
@@ -343,7 +344,6 @@ shape = SubResource("RectangleShape2D_ij6vw")
 debug_color = Color(0.801318, 0.26409635, 0.8125065, 0.41960785)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-z_index = 4
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_dd465")
 animation = &"AttackEnd"

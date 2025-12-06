@@ -103,6 +103,8 @@ animations = [{
 size = Vector2(9, 8)
 
 [node name="Spider" type="Node2D"]
+z_index = 1
+z_as_relative = false
 script = ExtResource("1_cgp8y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
