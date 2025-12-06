@@ -1,6 +1,6 @@
 extends Camera2D
 var rect
-var nightcolor = Color(0.029, 0.01, 0.141, 1.0)
+var nightcolor = Color(0.045, 0.008, 0.131, 1.0)
 var daycolor = Color(0.289, 0.693, 0.868, 1.0)
 var color = nightcolor
 var lerpcolor
