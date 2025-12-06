@@ -34,10 +34,15 @@ func _physics_process(delta:float) -> void:
 		else:
 			turned = false
 			$/root/Game/Player/AnimatedSprite2D.scale = Vector2.ONE #nolur nolmaz
-			player.set_collision_layer_value(1, not player.get_collision_layer_value(1))
-			player.set_collision_layer_value(2, not player.get_collision_layer_value(2))
-			player.set_collision_mask_value(1, not player.get_collision_mask_value(1))
-			player.set_collision_mask_value(2, not player.get_collision_mask_value(2))
+			collisionChange(1)
+			collisionChange(2)
 			sprite.play("idle")
+	
+	
 	if Input.is_action_just_pressed("GroundSwap") and $Area2D.overlaps_body(player):
 		sprite.play("anim")
+
+
+func collisionChange(layerValue) -> void:
+	player.set_collision_layer_value(layerValue, not player.get_collision_layer_value(layerValue))
+	player.set_collision_mask_value(layerValue, not player.get_collision_mask_value(layerValue))

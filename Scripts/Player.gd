@@ -12,7 +12,7 @@ var jumpBuffer = 0
 func _physics_process(delta: float) -> void:
 	#$Label.text = "X velocity: "+str(velocity.x) + "\nY velocity: " + str(velocity.y)	
 	
-	#hareket
+	#zıplama
 	if is_on_ceiling() and ySpeed < 0:
 		ySpeed = 0
 	if is_on_floor():
@@ -21,19 +21,15 @@ func _physics_process(delta: float) -> void:
 			sprite.play("land")
 		ySpeed = 0
 		if Input.is_action_pressed("Jump"):
-			jumpBuffer = 0
-			jumpfinished = false
-			sprite.play("jumpstart")
-			ySpeed -= 310
+			jump(0, jumpBuffer)
 	else:
 		if jumpBuffer > 0:
 			jumpBuffer -= delta
 			if Input.is_action_pressed("Jump"):
-				jumpBuffer = 0
-				jumpfinished = false
-				sprite.play("jumpstart")
-				ySpeed -= 310
+				jump(150, jumpBuffer)
 		ySpeed += 10
+		
+	#sağ sol hareket
 	inputDir = Input.get_axis("MoveLeft","MoveRight")
 	if inputDir != 0:
 		xSpeed = 225 * inputDir
@@ -44,17 +40,19 @@ func _physics_process(delta: float) -> void:
 			sprite.flip_h = true
 		else:
 			sprite.flip_h = false
+	#input gelmezse yavaş yavaş durma
 	else:
 		if abs(xSpeed) > 1:
 			xSpeed /= 1.25
 		else:
 			xSpeed=0
+			
+	#kapıya girerken hareketin engellenmesi
 	if sprite.scale < Vector2.ONE:
 		velocity = Vector2.ZERO
 	else:
 		velocity = Vector2(xSpeed,ySpeed)
 	move_and_slide()
-	
 	
 	#animasyon
 	if walkfinished and jumpfinished:
@@ -66,3 +64,10 @@ func _physics_process(delta: float) -> void:
 		sprite.play("idle")
 	if sprite.animation == "jumpstart" and sprite.frame >= 4:
 			sprite.play("jump")
+
+
+func jump(bufferAmount, currentBuffer) -> void:
+	jumpfinished = false
+	sprite.play("jumpstart")
+	ySpeed -= 310 + bufferAmount / (int(15 * currentBuffer)+1)
+	jumpBuffer = 0
