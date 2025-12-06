@@ -1,6 +1,8 @@
 extends Node2D
 
-const SPEED = 45
+@onready var SPEED = $Stats.SPEED
+@onready var HEALTH = $Stats.HEALTH
+@onready var STRENGTH = $Stats.STRENGTH
 var ySpeed = 0
 var direction = -1
 @onready var sprite = $AnimatedSprite2D
