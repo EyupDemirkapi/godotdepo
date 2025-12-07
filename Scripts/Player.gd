@@ -150,7 +150,7 @@ func attack() -> void:
 			xSpeed = DASH_SPEED
 
 func knockback(playerPos,strength) -> void:
-	if HEALTH > 0:
+	if HEALTH > 0 and invitimer <= 0:
 		knockedBack = true
 		sprite.play("Dead")
 		xSpeed = playerPos * strength

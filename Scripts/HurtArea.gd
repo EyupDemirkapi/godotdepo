@@ -11,5 +11,5 @@ func _on_body_entered(body: Node2D) -> void:
 		else:
 			if body.invitimer <= 0:
 				body.HEALTH -= get_parent().STRENGTH
-				body.invitimer = body.INVI_DURATION
 				body.knockback(body.position.x-get_parent().position.x,10.0*get_parent().STRENGTH)
+				body.invitimer = body.INVI_DURATION
