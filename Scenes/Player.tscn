@@ -169,9 +169,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bhhdu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bhhdu")
 }],
 "loop": false,
 "name": &"AttackEnd",
@@ -197,9 +194,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_miouo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o3h8g")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o3h8g")
@@ -274,9 +268,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_c43xd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c43xd")
 }],
 "loop": false,
 "name": &"JumpStart",
@@ -291,9 +282,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xixlo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bfbt0")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bfbt0")
@@ -320,11 +308,8 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_00okb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_00okb")
 }],
-"loop": true,
+"loop": false,
 "name": &"Walk",
 "speed": 10.0
 }]
@@ -344,8 +329,10 @@ debug_color = Color(0.801318, 0.26409635, 0.8125065, 0.41960785)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_dd465")
-animation = &"Dead"
+animation = &"Walk"
 autoplay = "Idle"
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("6_nn08x")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

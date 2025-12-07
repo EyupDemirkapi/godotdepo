@@ -12,6 +12,8 @@ extends CharacterBody2D
 var walkfinished = true
 var jumpfinished = true
 var attackfinished = true
+var animFinished = false
+var knockedBack = false
 
 var freed = false
 
@@ -31,50 +33,63 @@ func _physics_process(delta: float) -> void:
 	#$Label.text = str(HEALTH)
 	#saldırma
 	if HEALTH > 0:
-		attack()
-		if attackTimer > 0 and sprite.scale >= Vector2.ONE:
-			attackTimer -= delta
 		if invitimer > 0:
 			invitimer -= delta
-		#zıplama
-		if is_on_ceiling() and ySpeed < 0:
-			ySpeed = 0
-		if is_on_floor():
-			jumpBuffer = JUMP_BUFFER
-			if sprite.animation == "JumpLoop" or (sprite.animation == "AttackEnd" and sprite.frame >= 4):
-				attackfinished = true
-				sprite.play("Land")
-			if ySpeed >= 0:
-				ySpeed = 0
-			jump(0, jumpBuffer)
-		else:
-			if jumpBuffer > 0:
-				jumpBuffer -= delta
-				jump(150, jumpBuffer)
-			if sprite.animation == "AttackEnd" and sprite.frame >= 4:
-				attackfinished = true
-				sprite.play("JumpLoop")
-				jumpfinished = false
-			ySpeed += 10
+		if not knockedBack:
 		
-	#sağ sol hareket
-		inputDir = Input.get_axis("MoveLeft","MoveRight")
-		if inputDir != 0:
-			if attackfinished:
-				xSpeed = SPEED * inputDir
-			if jumpfinished and attackfinished:
-				sprite.play("Walk")
-			walkfinished = false
-			if inputDir < 0:
-				sprite.flip_h = true
-			else:
-				sprite.flip_h = false
-	#input gelmezse yavaş yavaş durma
-		elif attackfinished:
+			#sağ sol hareket
+			inputDir = Input.get_axis("MoveLeft","MoveRight")
+			if inputDir != 0:
+				if attackfinished:
+					xSpeed = SPEED * inputDir
+				if jumpfinished and attackfinished:
+					sprite.play("Walk")
+				walkfinished = false
+				if inputDir < 0:
+					sprite.flip_h = true
+				else:
+					sprite.flip_h = false
+			#input gelmezse yavaş yavaş durma
+			elif attackfinished:
+				if abs(xSpeed) > 1:
+					xSpeed /= 1.25
+				else:
+					xSpeed=0
+			
+			attack()
+			if attackTimer > 0 and sprite.scale >= Vector2.ONE:
+				attackTimer -= delta
+			
+			#zıplama
+			if is_on_ceiling() and ySpeed < 0:
+				ySpeed = 0
+		else:
 			if abs(xSpeed) > 1:
-				xSpeed /= 1.25
+				xSpeed /= 1.05
 			else:
 				xSpeed=0
+			if is_on_floor() and ySpeed > 0:
+				knockedBack = false
+				sprite.play("Idle")
+		if is_on_floor():
+			if not knockedBack:
+				jumpBuffer = JUMP_BUFFER
+				if sprite.animation == "JumpLoop" or (sprite.animation == "AttackEnd" and animFinished):
+					attackfinished = true
+					sprite.play("Land")
+				jump(0, jumpBuffer)
+			if ySpeed >= 0:
+				ySpeed = 0
+		else:
+			if not knockedBack:
+				if jumpBuffer > 0:
+					jumpBuffer -= delta
+					jump(150, jumpBuffer)
+				if sprite.animation == "AttackEnd" and animFinished:
+					attackfinished = true
+					sprite.play("JumpLoop")
+					jumpfinished = false
+			ySpeed += 10
 			
 	#kapıya girerken hareketin engellenmesi
 	if sprite.scale < Vector2.ONE:
@@ -86,16 +101,16 @@ func _physics_process(delta: float) -> void:
 	
 	#animasyon
 	if HEALTH > 0:
-		if walkfinished and jumpfinished and attackfinished:
+		if walkfinished and jumpfinished and attackfinished and not knockedBack:
 			sprite.play("Idle")
-		if sprite.animation == "Walk" and sprite.frame >= 6:
+		if sprite.animation == "Walk" and animFinished:
 			walkfinished = true
-		if sprite.animation == "Land" and sprite.frame >= 4:
+		if sprite.animation == "Land" and animFinished:
 			jumpfinished = true
 			sprite.play("Idle")
-		if sprite.animation == "JumpStart" and sprite.frame >= 4:
+		if sprite.animation == "JumpStart" and animFinished:
 			sprite.play("JumpLoop")
-		if sprite.animation == "AttackStart" and sprite.frame >= 3:
+		if sprite.animation == "AttackStart" and animFinished:
 			sprite.play("AttackLoop")
 		if sprite.animation == "AttackLoop" and attackTimer <= 0:
 			sprite.play("AttackEnd")
@@ -109,6 +124,8 @@ func _physics_process(delta: float) -> void:
 		ySpeed += 10
 		if position.y > 1000:
 			get_tree().reload_current_scene()
+	if animFinished:
+		animFinished = false
 
 
 func jump(bufferAmount, currentBuffer) -> void:
@@ -120,7 +137,7 @@ func jump(bufferAmount, currentBuffer) -> void:
 		else:
 			ySpeed -= JUMP_HEIGHT*2/3 + bufferAmount / (int(15 * currentBuffer)+1)
 		jumpBuffer = 0
-		
+
 func attack() -> void:
 	if Input.is_action_pressed("Attack") and attackfinished:
 		attackfinished = false
@@ -132,8 +149,12 @@ func attack() -> void:
 		else:
 			xSpeed = DASH_SPEED
 
-
 func knockback(playerPos,strength) -> void:
 	if HEALTH > 0:
+		knockedBack = true
+		sprite.play("Dead")
 		xSpeed = playerPos * strength
 		ySpeed = -25 * strength
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	animFinished = true
