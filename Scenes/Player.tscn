@@ -344,7 +344,7 @@ debug_color = Color(0.801318, 0.26409635, 0.8125065, 0.41960785)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_dd465")
-animation = &"AttackEnd"
+animation = &"Dead"
 autoplay = "Idle"
 
 [node name="Stats" type="Node" parent="."]

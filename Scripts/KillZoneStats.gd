@@ -1,7 +1,12 @@
 extends Node
-#sıçanın statlar
-
-const SPEED = 85
-const HEALTH = 3
 const STRENGTH = 1000
-const INVI_DURATION = 0.5
+#killzone kullanılmayacak statlar
+
+const SPEED = 0
+var HEALTH = 0
+const INVI_DURATION = 0
+var invitimer = 0
+const MASS = 1
+
+func knockback(playerPos,strength) -> void:
+	pass

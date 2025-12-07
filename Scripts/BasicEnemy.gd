@@ -6,6 +6,7 @@ const LEVEL_LIMIT = 120
 @onready var HEALTH = $Stats.HEALTH
 @onready var STRENGTH = $Stats.STRENGTH
 @onready var INVI_DURATION = $Stats.INVI_DURATION
+@onready var MASS = $Stats.MASS
 
 var xSpeed = 0
 var ySpeed = 0
@@ -66,7 +67,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		sprite.play("Dead")
 		if not freed:
-			ySpeed = -100
+			ySpeed = -250
 			freed = true
 		ySpeed += 10
 	position.y += delta * ySpeed

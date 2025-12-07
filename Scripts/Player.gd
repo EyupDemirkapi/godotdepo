@@ -13,6 +13,8 @@ var walkfinished = true
 var jumpfinished = true
 var attackfinished = true
 
+var freed = false
+
 var inputDir
 var xSpeed = 0.0
 var ySpeed = 0.0
@@ -32,6 +34,8 @@ func _physics_process(delta: float) -> void:
 		attack()
 		if attackTimer > 0 and sprite.scale >= Vector2.ONE:
 			attackTimer -= delta
+		if invitimer > 0:
+			invitimer -= delta
 		#zıplama
 		if is_on_ceiling() and ySpeed < 0:
 			ySpeed = 0
@@ -72,10 +76,10 @@ func _physics_process(delta: float) -> void:
 				xSpeed=0
 			
 	#kapıya girerken hareketin engellenmesi
-		if sprite.scale < Vector2.ONE:
-			velocity = Vector2.ZERO
-		else:
-			velocity = Vector2(xSpeed,ySpeed)
+	if sprite.scale < Vector2.ONE:
+		velocity = Vector2.ZERO
+	else:
+		velocity = Vector2(xSpeed,ySpeed)
 	move_and_slide()
 	
 	#animasyon
@@ -95,6 +99,12 @@ func _physics_process(delta: float) -> void:
 			sprite.play("AttackEnd")
 	else:
 		sprite.play("Dead")
+		if not freed:
+			xSpeed = 0
+			ySpeed = -250
+			freed = true
+			$CollisionShape2D.queue_free()
+		ySpeed += 10
 
 
 func jump(bufferAmount, currentBuffer) -> void:
