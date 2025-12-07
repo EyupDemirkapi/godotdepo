@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://d1mfpj2wu23l4"]
+[gd_scene load_steps=20 format=3 uid="uid://d1mfpj2wu23l4"]
 
 [ext_resource type="Script" uid="uid://d3wp8xkjm5q4n" path="res://Scripts/BasicEnemy.gd" id="1_itaso"]
 [ext_resource type="Texture2D" uid="uid://diy6efcm0dxkq" path="res://Sprites/fare.png" id="2_itaso"]
 [ext_resource type="Script" uid="uid://dqroavab6s1rl" path="res://Scripts/RatStats.gd" id="3_itaso"]
+[ext_resource type="PackedScene" uid="uid://uashcoev36bo" path="res://Scenes/HurtArea.tscn" id="3_mlyvy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mlyvy"]
 atlas = ExtResource("2_itaso")
@@ -127,7 +128,7 @@ sprite_frames = SubResource("SpriteFrames_o58ds")
 animation = &"Walk"
 autoplay = "Walk"
 
-[node name="HurtArea" type="Area2D" parent="."]
+[node name="HurtArea" parent="." instance=ExtResource("3_mlyvy")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
 position = Vector2(-1, -6)
@@ -150,3 +151,9 @@ collision_mask = 0
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("3_itaso")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -46.0
+offset_right = 21.0
+offset_bottom = -23.0

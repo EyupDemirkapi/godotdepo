@@ -19,14 +19,13 @@ var knockedBack = false
 @onready var hurtArea = $HurtArea
 
 func _ready() -> void:
-	connect("body_entered",body_entered)
 	RayLeft.set_collision_mask_value(get_parent().get_tileset().get_physics_layer_collision_layer(0),true)
 	RayRight.set_collision_mask_value(get_parent().get_tileset().get_physics_layer_collision_layer(0),true)
 	RayDown.set_collision_mask_value(get_parent().get_tileset().get_physics_layer_collision_layer(0),true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	body_entered(player)
+	$Label.text = "HP: " + str(int(HEALTH))
 	
 	if invitimer > 0:
 		invitimer -= delta
@@ -56,20 +55,6 @@ func _physics_process(delta: float) -> void:
 		
 	position.y += delta * ySpeed
 	
-
-
-func body_entered(body):
-	if body is CharacterBody2D:
-		if body.sprite.animation == "AttackStart" or body.sprite.animation == "AttackLoop" or body.sprite.animation == "AttackEnd":
-			if invitimer <= 0:
-				HEALTH -= player.STRENGTH
-				invitimer = INVI_DURATION
-				knockback(player.position.x-position.x,10)
-		else:
-			if body.invitimer <= 0:
-				body.HEALTH -= STRENGTH
-				body.invitimer = body.INVI_DURATION
-
 
 func knockback(playerPos,strength) -> void:
 	knockedBack = true
