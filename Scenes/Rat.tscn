@@ -1,0 +1,153 @@
+[gd_scene load_steps=19 format=3 uid="uid://d1mfpj2wu23l4"]
+
+[ext_resource type="Script" uid="uid://d3wp8xkjm5q4n" path="res://Scripts/BasicEnemy.gd" id="1_itaso"]
+[ext_resource type="Texture2D" uid="uid://diy6efcm0dxkq" path="res://Sprites/fare.png" id="2_itaso"]
+[ext_resource type="Script" uid="uid://dqroavab6s1rl" path="res://Scripts/RatStats.gd" id="3_itaso"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlyvy"]
+atlas = ExtResource("2_itaso")
+region = Rect2(0, 48, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sb1dd"]
+atlas = ExtResource("2_itaso")
+region = Rect2(0, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bypqk"]
+atlas = ExtResource("2_itaso")
+region = Rect2(32, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mku5s"]
+atlas = ExtResource("2_itaso")
+region = Rect2(64, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_167ei"]
+atlas = ExtResource("2_itaso")
+region = Rect2(96, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pj03"]
+atlas = ExtResource("2_itaso")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_at2dy"]
+atlas = ExtResource("2_itaso")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edjji"]
+atlas = ExtResource("2_itaso")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eov17"]
+atlas = ExtResource("2_itaso")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjrva"]
+atlas = ExtResource("2_itaso")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orgc5"]
+atlas = ExtResource("2_itaso")
+region = Rect2(32, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_228se"]
+atlas = ExtResource("2_itaso")
+region = Rect2(64, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56ukh"]
+atlas = ExtResource("2_itaso")
+region = Rect2(96, 16, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o58ds"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mlyvy")
+}],
+"loop": false,
+"name": &"Dead",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sb1dd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bypqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mku5s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_167ei")
+}],
+"loop": false,
+"name": &"Hurt",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pj03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_at2dy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edjji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eov17")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjrva")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orgc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_228se")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56ukh")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0c13e"]
+size = Vector2(22, 12)
+
+[node name="Rat" type="Node2D"]
+z_index = 1
+z_as_relative = false
+script = ExtResource("1_itaso")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_o58ds")
+animation = &"Walk"
+autoplay = "Walk"
+frame_progress = 0.32221776
+
+[node name="HurtArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
+position = Vector2(-1, -6)
+shape = SubResource("RectangleShape2D_0c13e")
+
+[node name="RaycastLeft" type="RayCast2D" parent="."]
+position = Vector2(-6, -3)
+target_position = Vector2(-10, 0)
+collision_mask = 0
+
+[node name="RaycastRight" type="RayCast2D" parent="."]
+position = Vector2(6, -3)
+target_position = Vector2(10, 0)
+collision_mask = 0
+
+[node name="RaycastDown" type="RayCast2D" parent="."]
+position = Vector2(0, -1)
+target_position = Vector2(0, 3)
+collision_mask = 0
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("3_itaso")
