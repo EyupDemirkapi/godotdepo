@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bfm46jyc6gku2"]
+[gd_scene load_steps=22 format=3 uid="uid://bfm46jyc6gku2"]
 
 [ext_resource type="PackedScene" uid="uid://b3gfvdnqrfvf6" path="res://Scenes/Player.tscn" id="1_kldst"]
 [ext_resource type="Texture2D" uid="uid://b4aei3sqpcmow" path="res://Sprites/toprak.png" id="2_b2bpf"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cd6qhttn2mc1g" path="res://Scenes/Door.tscn" id="4_fgofq"]
 [ext_resource type="PackedScene" uid="uid://d1mfpj2wu23l4" path="res://Scenes/Rat.tscn" id="5_7lihs"]
 [ext_resource type="PackedScene" uid="uid://xed4xyvwc7vq" path="res://Scenes/Spider.tscn" id="5_b2bpf"]
+[ext_resource type="PackedScene" uid="uid://cemqui3mrgxam" path="res://Scenes/LightArea.tscn" id="6_3cx6b"]
 [ext_resource type="Script" uid="uid://dylmnnv5b84f" path="res://Scripts/Parallax.gd" id="6_dahhg"]
 [ext_resource type="Texture2D" uid="uid://dtbfphwxpdnt6" path="res://Sprites/Background_Sprite.png" id="7_3so38"]
 [ext_resource type="PackedScene" uid="uid://cba3bk3l05b3f" path="res://Scenes/Camera.tscn" id="7_fgofq"]
@@ -255,6 +256,9 @@ terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_epypp")
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3cx6b"]
+normal = Vector2(0, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0hol4"]
 texture = ExtResource("3_7lihs")
@@ -540,6 +544,12 @@ position = Vector2(158, 11)
 
 [node name="Rat" parent="ExteriorTileMap" instance=ExtResource("5_7lihs")]
 position = Vector2(118, 7)
+
+[node name="LightArea" parent="ExteriorTileMap" instance=ExtResource("6_3cx6b")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExteriorTileMap/LightArea"]
+position = Vector2(1, 121)
+shape = SubResource("WorldBoundaryShape2D_3cx6b")
 
 [node name="InteriorTileMap" type="TileMap" parent="."]
 z_as_relative = false

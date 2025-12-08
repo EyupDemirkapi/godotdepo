@@ -12,7 +12,6 @@ var daytimer = 0
 @onready var moon = $Moon
 @onready var sun = $Sun
 @onready var player = $/root/Game/Player
-@onready var camera = $/root/Game/Camera2D
 
 const DAYLENGTH = 100
 const YVALUE = 60
