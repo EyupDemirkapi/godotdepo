@@ -20,11 +20,13 @@ var alphatimer
 
 const CAMERA_BOT_LIMIT = 0.0
 const CAMERA_TOP_LIMIT = -100.0
+
+
 func _physics_process(delta: float) -> void:
 	if player.position.y >= CAMERA_BOT_LIMIT or player.position.y <= CAMERA_TOP_LIMIT:
-		position.x = player.position.x
+		position.x = ParallaxDisplay.ParallaxMethodFloat(self,player.position.x)
 	else:
-		position = player.position
+		position = ParallaxDisplay.ParallaxMethodVector(self,player.position)
 	#arkaplan boyutu
 	rect = Rect2(DisplayServer.screen_get_position() - DisplayServer.screen_get_size()/2,DisplayServer.screen_get_size())
 	#ayla güneşin alfasını hesaplamak için
