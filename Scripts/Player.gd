@@ -160,3 +160,10 @@ func knockback(playerPos,strength) -> void:
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	animFinished = true
+func take_damage(amount: int) -> void:
+	if invitimer > 0:
+		return
+
+	HEALTH -= amount
+	invitimer = INVI_DURATION
+	sprite.play("Dead")
