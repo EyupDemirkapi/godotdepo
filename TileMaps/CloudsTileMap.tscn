@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://dl5fbvbpwj1b3"]
+
+[ext_resource type="Texture2D" uid="uid://dtbfphwxpdnt6" path="res://Sprites/Background_Sprite.png" id="1_3gqi3"]
+[ext_resource type="Script" path="res://Scripts/Parallax.gd" id="2_xh82g"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wtdk"]
+texture = ExtResource("1_3gqi3")
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/terrains_peering_bit/right_side = 0
+1:0/0/terrains_peering_bit/bottom_right_corner = 0
+1:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0/terrains_peering_bit/bottom_left_corner = 0
+1:0/0/terrains_peering_bit/left_side = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/terrains_peering_bit/bottom_side = 0
+2:0/0/terrains_peering_bit/bottom_left_corner = 0
+2:0/0/terrains_peering_bit/left_side = 0
+3:0/0 = 0
+3:0/0/terrain_set = 0
+3:0/0/terrain = 0
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 0
+0:1/0/terrains_peering_bit/right_side = 0
+0:1/0/terrains_peering_bit/top_side = 0
+0:1/0/terrains_peering_bit/top_right_corner = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/terrains_peering_bit/right_side = 0
+1:1/0/terrains_peering_bit/left_side = 0
+1:1/0/terrains_peering_bit/top_left_corner = 0
+1:1/0/terrains_peering_bit/top_side = 0
+1:1/0/terrains_peering_bit/top_right_corner = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 0
+2:1/0/terrains_peering_bit/left_side = 0
+2:1/0/terrains_peering_bit/top_left_corner = 0
+2:1/0/terrains_peering_bit/top_side = 0
+3:1/0 = 0
+3:1/0/terrain_set = 0
+3:1/0/terrain = 0
+3:1/0/terrains_peering_bit/right_side = 0
+4:1/0 = 0
+4:1/0/terrain_set = 0
+4:1/0/terrain = 0
+4:1/0/terrains_peering_bit/left_side = 0
+6:0/0 = 0
+6:1/0 = 0
+6:2/0 = 0
+6:3/0 = 0
+6:4/0 = 0
+6:5/0 = 0
+6:6/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_wxwew"]
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Clouds"
+terrain_set_0/terrain_0/color = Color(0.48137856, 0.7211893, 0.96316344, 1)
+sources/0 = SubResource("TileSetAtlasSource_0wtdk")
+
+[node name="CloudsTileMap" type="TileMap"]
+z_index = -4
+z_as_relative = false
+tile_set = SubResource("TileSet_wxwew")
+format = 2
+layer_0/tile_data = PackedInt32Array(-131070, 0, 1, -131069, 65536, 1, -196605, 65536, 0, -196606, 0, 0, -196604, 131072, 0, -131068, 131072, 1, -262138, 196608, 1, -262137, 262144, 1, -327676, 196608, 0, -393211, 196608, 1, -393210, 262144, 1, -196599, 196608, 0, -262149, 0, 0, -262148, 65536, 0, -262147, 131072, 0, -196611, 131072, 1, -196612, 65536, 1, -196613, 0, 1, -327686, 262144, 1, -327687, 196608, 1, -393219, 196608, 0, -65526, 0, 0, 10, 0, 1, 11, 65536, 1, 12, 131072, 1, -65524, 131072, 0, -65525, 65536, 0, -196596, 196608, 1, -196595, 262144, 1, -262129, 196608, 0)
+script = ExtResource("2_xh82g")

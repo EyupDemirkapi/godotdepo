@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://cneok7bet0djq"]
+
+[ext_resource type="Texture2D" uid="uid://bgo0canbpyg8b" path="res://Sprites/Dış_Kale_Sprite.png" id="1_kt30g"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lr0qs"]
+texture = ExtResource("1_kt30g")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_imnls"]
+sources/0 = SubResource("TileSetAtlasSource_lr0qs")
+
+[node name="Castle_Tilemap" type="TileMap"]
+tile_set = SubResource("TileSet_imnls")
+format = 2
