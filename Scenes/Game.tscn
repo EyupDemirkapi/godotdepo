@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bfm46jyc6gku2"]
+[gd_scene load_steps=26 format=3 uid="uid://bfm46jyc6gku2"]
 
 [ext_resource type="PackedScene" uid="uid://b3gfvdnqrfvf6" path="res://Scenes/Player.tscn" id="1_kldst"]
 [ext_resource type="Texture2D" uid="uid://b4aei3sqpcmow" path="res://Sprites/toprak.png" id="2_b2bpf"]
@@ -6,14 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://cd6qhttn2mc1g" path="res://Scenes/Door.tscn" id="4_fgofq"]
 [ext_resource type="PackedScene" uid="uid://d1mfpj2wu23l4" path="res://Scenes/Rat.tscn" id="5_7lihs"]
 [ext_resource type="PackedScene" uid="uid://xed4xyvwc7vq" path="res://Scenes/Spider.tscn" id="5_b2bpf"]
-[ext_resource type="PackedScene" uid="uid://cemqui3mrgxam" path="res://Scenes/LightArea.tscn" id="6_3cx6b"]
-[ext_resource type="Script" uid="uid://dylmnnv5b84f" path="res://Scripts/Parallax.gd" id="6_dahhg"]
+[ext_resource type="PackedScene" path="res://Scenes/LightArea.tscn" id="6_3cx6b"]
+[ext_resource type="Script" path="res://Scripts/Parallax.gd" id="6_dahhg"]
 [ext_resource type="Texture2D" uid="uid://dtbfphwxpdnt6" path="res://Sprites/Background_Sprite.png" id="7_3so38"]
 [ext_resource type="PackedScene" uid="uid://cba3bk3l05b3f" path="res://Scenes/Camera.tscn" id="7_fgofq"]
 [ext_resource type="Texture2D" uid="uid://bgo0canbpyg8b" path="res://Sprites/Dış_Kale_Sprite.png" id="7_wxwew"]
 [ext_resource type="PackedScene" uid="uid://uashcoev36bo" path="res://Scenes/HurtArea.tscn" id="8_2irst"]
 [ext_resource type="PackedScene" uid="uid://dg7ntxppviwx6" path="res://Scenes/KillZone.tscn" id="8_bf53h"]
 [ext_resource type="Script" uid="uid://lu45y3y8cvan" path="res://Scripts/KillZoneStats.gd" id="9_71axn"]
+[ext_resource type="PackedScene" uid="uid://dpsjy4jrj2a2x" path="res://tree_enemy.tscn" id="15_acvyw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_epypp"]
 texture = ExtResource("2_b2bpf")
@@ -614,3 +615,6 @@ collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone/HurtArea"]
 shape = SubResource("WorldBoundaryShape2D_bf53h")
+
+[node name="TreeEnemy" parent="." instance=ExtResource("15_acvyw")]
+position = Vector2(821, -9)
