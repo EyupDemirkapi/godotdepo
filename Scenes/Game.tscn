@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bfm46jyc6gku2"]
+[gd_scene load_steps=28 format=3 uid="uid://bfm46jyc6gku2"]
 
 [ext_resource type="PackedScene" uid="uid://b3gfvdnqrfvf6" path="res://Scenes/Player.tscn" id="1_kldst"]
 [ext_resource type="Texture2D" uid="uid://b4aei3sqpcmow" path="res://Sprites/toprak.png" id="2_b2bpf"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://uashcoev36bo" path="res://Scenes/HurtArea.tscn" id="8_2irst"]
 [ext_resource type="PackedScene" uid="uid://dg7ntxppviwx6" path="res://Scenes/KillZone.tscn" id="8_bf53h"]
 [ext_resource type="Script" uid="uid://lu45y3y8cvan" path="res://Scripts/KillZoneStats.gd" id="9_71axn"]
+[ext_resource type="PackedScene" uid="uid://b0lhdboocytme" path="res://Scenes/NoLightArea.tscn" id="9_alh3a"]
 [ext_resource type="PackedScene" uid="uid://dtun8dhwb3qmw" path="res://tree_enemy.tscn" id="15_acvyw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_epypp"]
@@ -282,6 +283,9 @@ texture = ExtResource("7_wxwew")
 
 [sub_resource type="TileSet" id="TileSet_3cx6b"]
 sources/0 = SubResource("TileSetAtlasSource_acvyw")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4q8tf"]
+size = Vector2(50, 75)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0hol4"]
 texture = ExtResource("3_7lihs")
@@ -655,6 +659,15 @@ layer_0/tile_data = PackedInt32Array(-65538, 393216, 5, -2, 393216, 5, 65534, 39
 
 [node name="TreeEnemy" parent="ExteriorTileMap" instance=ExtResource("15_acvyw")]
 position = Vector2(248, -38)
+
+[node name="NoLightArea" parent="ExteriorTileMap" instance=ExtResource("9_alh3a")]
+light_mask = 1
+visibility_layer = 1
+position = Vector2(246, -13)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExteriorTileMap/NoLightArea"]
+position = Vector2(1, -6)
+shape = SubResource("RectangleShape2D_4q8tf")
 
 [node name="InteriorTileMap" type="TileMap" parent="."]
 z_as_relative = false

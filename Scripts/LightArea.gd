@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 		isPlayerInLight = false
 		lightTimer = 0.0
 	#$/root/Game/Label.text = "Light Timer: {0}, Is Player In: {1}".format([str(lightTimer),str(isPlayerIn)])
-	if isPlayerInLight and player.HEALTH > 0 and sun.position.y < moon.position.y:
+	if (not player.isInNoLightArea) and isPlayerInLight and player.HEALTH > 0 and sun.position.y < moon.position.y:
 		lightTimer -= delta
 		if lightTimer <= 0:
 			player.HEALTH -= 1
