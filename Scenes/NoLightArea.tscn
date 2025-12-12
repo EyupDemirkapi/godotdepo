@@ -8,3 +8,6 @@ z_as_relative = false
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_soxxg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

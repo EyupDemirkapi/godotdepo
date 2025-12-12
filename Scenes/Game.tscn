@@ -661,8 +661,6 @@ layer_0/tile_data = PackedInt32Array(-65538, 393216, 5, -2, 393216, 5, 65534, 39
 position = Vector2(248, -38)
 
 [node name="NoLightArea" parent="ExteriorTileMap" instance=ExtResource("9_alh3a")]
-light_mask = 1
-visibility_layer = 1
 position = Vector2(246, -13)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExteriorTileMap/NoLightArea"]

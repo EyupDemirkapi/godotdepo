@@ -170,11 +170,10 @@ func take_damage(amount: int) -> void:
 	invitimer = INVI_DURATION
 	sprite.play("Dead")
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	print(area.name)
-	if area.name == "NoLightArea":
-		isInNoLightArea = true
 
-func _on_area_2d_area_exited(area: Area2D) -> void:
-	if area.name == "NoLightArea":
-		isInNoLightArea = false
+#func _on_area_2d_area_entered(area: Area2D) -> void:
+#	print("Entered",area.name)
+
+
+#func _on_area_2d_area_exited(area: Area2D) -> void:
+#	print("Exited",area.name)
