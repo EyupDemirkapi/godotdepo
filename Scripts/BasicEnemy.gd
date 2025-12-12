@@ -18,6 +18,7 @@ var invitimer = 0
 var knockedBack = false
 var freed = false
 var attacking = false
+var attackTimer = 5.0
 
 @onready var sprite = $AnimatedSprite2D
 @onready var RayLeft = $RaycastLeft
@@ -34,13 +35,20 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	if AWARENESS <= 0 or abs(position.x - player.position.x) <= AWARENESS:
-		attacking = true
 	
 	if position.y > LEVEL_LIMIT:
 		queue_free()
 	#$Label.text = "HP: " + str(int(HEALTH))
 	if HEALTH > 0:
+		if AWARENESS <= 0:
+			attacking = true
+		elif abs(position.x - player.position.x) <= AWARENESS:
+			if attackTimer <= 0.0:
+				sprite.play("Attack")
+				attacking = true
+		
+		if attackTimer > 0:
+			attackTimer -= delta
 		if invitimer > 0:
 			invitimer -= delta
 		

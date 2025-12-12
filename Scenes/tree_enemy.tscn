@@ -121,8 +121,8 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_knasm")
 }],
-"loop": true,
-"name": &"attack",
+"loop": false,
+"name": &"Attack",
 "speed": 6.0
 }, {
 "frames": [{
@@ -157,7 +157,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_dcmpx")
 }],
 "loop": false,
-"name": &"death",
+"name": &"Dead",
 "speed": 8.0
 }, {
 "frames": [{
@@ -171,7 +171,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_uynkp")
 }],
 "loop": false,
-"name": &"hurt",
+"name": &"Hurt",
 "speed": 5.0
 }, {
 "frames": [{
@@ -185,7 +185,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_btjmi")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"Idle",
 "speed": 3.0
 }]
 
@@ -198,8 +198,8 @@ script = ExtResource("1_xrvsy")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -56)
 sprite_frames = SubResource("SpriteFrames_rwhvo")
-animation = &"attack"
-autoplay = "idle"
+animation = &"Hurt"
+autoplay = "Idle"
 
 [node name="HurtArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -220,4 +220,5 @@ script = ExtResource("3_r8pdk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="HurtArea" to="HurtArea" method="_on_body_entered"]

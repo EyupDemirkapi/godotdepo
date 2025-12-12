@@ -9,38 +9,47 @@ const isStationary = true
 @onready var MASS = $Stats.MASS
 @onready var BYPASSES_INVIS = $Stats.BYPASSES_INVIS
 @onready var AWARENESS = $Stats.AWARENESS
+@onready var ATTACKTIMER = $Stats.ATTACKTIMER
 
 var ySpeed = 0
 var invitimer = 0
 var knockedBack = false
 var freed = false
 var attacking = false
+var attackTimer = ATTACKTIMER
 
 @onready var sprite = $AnimatedSprite2D
-@onready var RayLeft = $RaycastLeft
-@onready var RayRight = $RaycastRight
 @onready var RayDown = $RaycastDown
 @onready var player = $/root/Game/Player
 @onready var hurtArea = $HurtArea
 
 func _ready() -> void:
+	attackTimer = ATTACKTIMER
 	RayDown.set_collision_mask_value(get_parent().get_tileset().get_physics_layer_collision_layer(0),true)
 	hurtArea.set_collision_mask_value(get_parent().get_tileset().get_physics_layer_collision_layer(0),true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	if AWARENESS <= 0 or abs(position.x - player.position.x) <= AWARENESS:
-		attacking = true
-	
 	if position.y > LEVEL_LIMIT:
 		queue_free()
 	#$Label.text = "HP: " + str(int(HEALTH))
 	if HEALTH > 0:
+		if AWARENESS <= 0:
+			attacking = true
+		elif abs(position.x - player.position.x) <= AWARENESS:
+			if attackTimer > 0.0:
+				print(attackTimer)
+				attackTimer -= delta
+			elif sprite.animation != "Attack":
+				sprite.play("Attack")
+				attacking = true
+		
 		if invitimer > 0:
 			invitimer -= delta
 		
 		if not knockedBack:
-			sprite.play("Walk")
+			if sprite.animation == "Hurt":
+				sprite.play("Idle")
 		else:
 			sprite.play("Hurt")
 		
@@ -65,3 +74,10 @@ func knockback(playerPos,strength) -> void:
 	if HEALTH > 0:
 		knockedBack = true
 		ySpeed = -25 * strength
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if sprite.animation == "Attack":
+		attackTimer = ATTACKTIMER
+		attacking = false
+		sprite.play("Idle")
