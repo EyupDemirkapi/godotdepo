@@ -38,7 +38,6 @@ func _physics_process(delta: float) -> void:
 			attacking = true
 		elif abs(position.x - player.position.x) <= AWARENESS:
 			if attackTimer > 0.0:
-				print(attackTimer)
 				attackTimer -= delta
 			elif sprite.animation != "Attack":
 				sprite.play("Attack")

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://51bftvpvo0s1" path="res://Scripts/StationaryEnemy.gd" id="1_xrvsy"]
 [ext_resource type="Texture2D" uid="uid://cipi18dmb1ros" path="res://Sprites/Tree_Enemy_sprite.png" id="2_r8pdk"]
 [ext_resource type="Script" uid="uid://cq5vqxgotrdxr" path="res://Scripts/TreeStats.gd" id="3_r8pdk"]
-[ext_resource type="Script" uid="uid://curcc564obj53" path="res://Scripts/HurtArea.gd" id="3_rtnmu"]
+[ext_resource type="PackedScene" uid="uid://uashcoev36bo" path="res://Scenes/HurtArea.tscn" id="3_rtnmu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ep4db"]
 atlas = ExtResource("2_r8pdk")
@@ -201,10 +201,7 @@ sprite_frames = SubResource("SpriteFrames_rwhvo")
 animation = &"Hurt"
 autoplay = "Idle"
 
-[node name="HurtArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 0
-script = ExtResource("3_rtnmu")
+[node name="HurtArea" parent="." instance=ExtResource("3_rtnmu")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
 position = Vector2(0, -27)
@@ -218,7 +215,4 @@ collision_mask = 0
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("3_r8pdk")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="body_entered" from="HurtArea" to="HurtArea" method="_on_body_entered"]
