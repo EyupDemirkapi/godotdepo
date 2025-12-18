@@ -1,9 +1,9 @@
 extends StaticBody2D
 
 
-@onready var exterior = $/root/Game/ExteriorTileMap
-@onready var interior = $/root/Game/InteriorTileMap
-@onready var player = $/root/Game/Player
+@onready var exterior = $/root/Game/Modulate/ExteriorTileMap
+@onready var interior = $/root/Game/Modulate/InteriorTileMap
+@onready var player = $/root/Game/Modulate/Player
 @onready var sprite = $AnimatedSprite2D
 var isInterior = true
 var turned = false
@@ -19,19 +19,19 @@ func _physics_process(delta:float) -> void:
 			turned = true
 			isInterior = not isInterior
 		if sprite.frame < 4:
-			$/root/Game/Player/AnimatedSprite2D.scale *= 0.8
+			player.scale *= 0.8
 		elif sprite.frame < 8:
 			if isInterior:
 				alphaTween(true)
 			else:
 				alphaTween(false)
-			if $/root/Game/Player/AnimatedSprite2D.scale < Vector2.ONE:
-				$/root/Game/Player/AnimatedSprite2D.scale /= 0.8
+			if player.scale < Vector2.ONE:
+				player.scale /= 0.8
 			else:
-				$/root/Game/Player/AnimatedSprite2D.scale = Vector2.ONE
+				player.scale = Vector2.ONE
 		else:
 			turned = false
-			$/root/Game/Player/AnimatedSprite2D.scale = Vector2.ONE #nolur nolmaz
+			player.scale = Vector2.ONE #nolur nolmaz
 			collisionChange(1)
 			collisionChange(2)
 			sprite.play("Idle")

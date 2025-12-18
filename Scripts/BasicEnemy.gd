@@ -25,7 +25,7 @@ var attackTimer = ATTACKTIMER
 @onready var RayLeft = $RaycastLeft
 @onready var RayRight = $RaycastRight
 @onready var RayDown = $RaycastDown
-@onready var player = $/root/Game/Player
+@onready var player = $/root/Game/Modulate/Player
 @onready var hurtArea = $HurtArea
 
 func _ready() -> void:

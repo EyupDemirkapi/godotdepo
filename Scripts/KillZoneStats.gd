@@ -8,6 +8,3 @@ const INVI_DURATION = 0
 var invitimer = 0
 const MASS = 1
 const BYPASSES_INVIS = true
-
-func knockback(playerPos,strength) -> void:
-	pass

@@ -11,9 +11,10 @@ var daytimer = 0
 
 @onready var moon = $Moon
 @onready var sun = $Sun
-@onready var player = $/root/Game/Player
+@onready var player = $/root/Game/Modulate/Player
+@onready var modulateIngame = $/root/Game/Modulate
 
-const DAYLENGTH = 100
+const DAYLENGTH = 10
 const YVALUE = 60
 
 var alphatimer
@@ -23,6 +24,7 @@ const CAMERA_TOP_LIMIT = -100.0
 
 
 func _physics_process(delta: float) -> void:
+	#W$Label.text = "Alpha Timer: {0}\nDay timer: {1}".format([alphatimer,daytimer])
 	if player.position.y >= CAMERA_BOT_LIMIT or player.position.y <= CAMERA_TOP_LIMIT:
 		position.x = ParallaxDisplay.ParallaxMethodFloat(self,player.position.x)
 	else:
@@ -30,36 +32,31 @@ func _physics_process(delta: float) -> void:
 	#arkaplan boyutu
 	rect = Rect2(DisplayServer.screen_get_position() - DisplayServer.screen_get_size()/2,DisplayServer.screen_get_size())
 	#ayla güneşin alfasını hesaplamak için
-	alphatimer = ((daytimer - 0.5)**2)*-(2.0**2) + 1
-	
+	#alphatimer = ((daytimer*0.5 - 0.5)**8)*-(2.0**8) + 1
+	alphatimer = sin((daytimer-0.5)*PI)/2 + 0.5
 	#gün gece geçişi
 	if color.r <= nightcolor.r:
 		dayTransition(true)
 	elif color.r >= daycolor.r:
 		dayTransition(false)
+	if moon.modulate.a <= 0 and sun.modulate.a <= 0:
+		sun.position.x *= -1
+		moon.position.x *= -1
+	moon.modulate.a = lerp(1,0,alphatimer)
+	sun.modulate.a = lerp(0,1,alphatimer)
+	modulateIngame.modulate = lerp(Color.DIM_GRAY,Color.WHITE,daytimer)
 	
-	daytimer += delta / DAYLENGTH
-	
-	moon.modulate.a = lerp(0,1,alphatimer*2)
-	sun.modulate.a = lerp(0,1,alphatimer*2)
-	
-	if day:
-		dayProgress(nightcolor)
-	else:
-		dayProgress(daycolor)
+	dayProgress(not day,delta)
 	queue_redraw()
 	#$Label.text = "r: " + str(color.r) + "g: " + str(color.g) + "b: " + str(color.b)
 func _draw() -> void:
 	draw_rect(rect,color)
 	
 func dayTransition(toDay) -> void:
-		sun.position.x *= -1
-		moon.position.x *= -1
-		day = not toDay
-		daytimer = 0
-		lerpcolor = color
-		
-func dayProgress(toColor) -> void:
-	moon.position.y = lerp(YVALUE*int(day) - YVALUE*2*int(not day),YVALUE*int(not day) - YVALUE*2*int(day),daytimer)
-	sun.position.y = lerp(YVALUE*int(not day) - YVALUE*2*int(day),YVALUE*int(day) - YVALUE*2*int(not day),daytimer)
-	color = lerpcolor.lerp(toColor,daytimer)
+	day = not toDay
+	
+func dayProgress(isDay,delta) -> void:
+	moon.position.y = lerp(-YVALUE,YVALUE,alphatimer)
+	sun.position.y = lerp(YVALUE,-YVALUE,alphatimer)
+	color = lerp(nightcolor,daycolor,daytimer)
+	daytimer += (2*int(isDay) - 1)*delta/ DAYLENGTH

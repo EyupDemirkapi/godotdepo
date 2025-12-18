@@ -2,7 +2,7 @@ extends Area2D
 
 var isPlayerInLight = false
 var lightTimer = 0.0
-@onready var player = $/root/Game/Player
+@onready var player = $/root/Game/Modulate/Player
 @onready var moon = $/root/Game/Camera2D/Moon
 @onready var sun = $/root/Game/Camera2D/Sun
 

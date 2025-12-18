@@ -1,7 +1,7 @@
 extends Area2D
 
 var isAttackable = false
-@onready var player = $/root/Game/Player
+@onready var player = $/root/Game/Modulate/Player
 
 func _physics_process(delta: float) -> void:
 	if get_parent().HEALTH > 0 and isAttackable:
