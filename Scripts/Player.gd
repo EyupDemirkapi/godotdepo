@@ -59,7 +59,7 @@ func _physics_process(delta: float) -> void:
 					xSpeed=0
 			
 			attack()
-			if attackTimer > 0 and sprite.scale >= Vector2.ONE:
+			if attackTimer > 0 and scale >= Vector2.ONE:
 				attackTimer -= delta
 			
 			#zıplama
@@ -94,7 +94,7 @@ func _physics_process(delta: float) -> void:
 			ySpeed += 10
 			
 	#kapıya girerken hareketin engellenmesi
-	if sprite.scale < Vector2.ONE:
+	if scale < Vector2.ONE:
 		invitimer = INVI_DURATION
 		velocity = Vector2.ZERO
 	else:

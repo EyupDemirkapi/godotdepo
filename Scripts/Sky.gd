@@ -14,7 +14,7 @@ var daytimer = 0
 @onready var player = $/root/Game/Modulate/Player
 @onready var modulateIngame = $/root/Game/Modulate
 
-const DAYLENGTH = 10
+const DAYLENGTH = 100
 const YVALUE = 60
 
 var alphatimer
