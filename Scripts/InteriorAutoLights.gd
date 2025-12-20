@@ -10,6 +10,7 @@ var windows
 #var tile_image:Image = image.get_region(rect)
 var tex:ImageTexture
 func _ready() -> void:
+	lightArea.add_child(tilemap.get_node(^"CollisionShape2D"))
 	windows = tilemap.get_used_cells_by_id(0,0,Vector2(1,0))
 	#for i in tile_image.get_height():
 	#	for i2 in tile_image.get_width():
