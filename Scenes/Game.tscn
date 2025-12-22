@@ -695,7 +695,6 @@ texture = ExtResource("11_4q8tf")
 0:1/0 = 0
 1:0/size_in_atlas = Vector2i(3, 3)
 1:0/0 = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -8, 4, -8, 20, 56, -20, 56)
 2:3/0 = 0
 3:3/0 = 0
 4:0/size_in_atlas = Vector2i(3, 1)
@@ -715,7 +714,7 @@ texture = ExtResource("11_4q8tf")
 3:4/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_8r6kd"]
-physics_layer_0/collision_layer = 0
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_x3xnh")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3cx6b"]
@@ -814,8 +813,6 @@ layer_0/tile_data = PackedInt32Array(-196629, 393216, 6, -131093, 393216, 6, -65
 z_index = 1
 position = Vector2(1, 1)
 script = ExtResource("10_x3xnh")
-
-[node name="LightArea" parent="Modulate/InteriorTileMap/BgTileMap" instance=ExtResource("6_3cx6b")]
 
 [node name="CloudsTileMap" type="TileMap" parent="Modulate"]
 z_index = -4
