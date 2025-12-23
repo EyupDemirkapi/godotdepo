@@ -33,7 +33,8 @@ func _physics_process(delta: float) -> void:
 	rect = Rect2(DisplayServer.screen_get_position() - DisplayServer.screen_get_size()/2,DisplayServer.screen_get_size())
 	#ayla güneşin alfasını hesaplamak için
 	#alphatimer = ((daytimer*0.5 - 0.5)**8)*-(2.0**8) + 1
-	alphatimer = sin((daytimer-0.5)*PI)/2 + 0.5
+	#alphatimer = sin((daytimer-0.5)*PI)/2 + 0.5
+	alphatimer = 2*((daytimer/2)-(sin(2*PI*daytimer))/(4*PI))
 	#gün gece geçişi
 	if color.r <= nightcolor.r:
 		dayTransition(true)

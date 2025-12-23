@@ -5,6 +5,7 @@ var lightTimer = 0.0
 @onready var player = $/root/Game/Modulate/Player
 @onready var moon = $/root/Game/Camera2D/Moon
 @onready var sun = $/root/Game/Camera2D/Sun
+@onready var heartGenerator = $/root/Game/Camera2D/UI/HeartUIGenerator
 
 func _ready() -> void:
 	set_collision_layer_value(get_parent().get_tileset().get_physics_layer_collision_mask(0),true)
@@ -20,6 +21,7 @@ func _physics_process(delta: float) -> void:
 		lightTimer -= delta
 		if lightTimer <= 0:
 			player.HEALTH -= 1
+			heartGenerator.generateHearts(player.HEALTH)
 			player.knockback(0,3.5)
 			lightTimer = lerp(6,1,-sun.position.y/60)
 			if lightTimer > 6:
@@ -30,11 +32,7 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body == player:
 		isPlayerInLight = true
-		lightTimer = lerp(6,1,-sun.position.y/60)
-		if lightTimer > 6:
-			lightTimer = 6
-		elif lightTimer < 1:
-			lightTimer = 1
+		lightTimer = 0.5
 func _on_body_exited(body: Node2D) -> void:
 	if body == player:
 		isPlayerInLight = false
