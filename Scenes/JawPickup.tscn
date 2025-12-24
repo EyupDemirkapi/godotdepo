@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://0ykpnrhf1oa7"]
+
+[ext_resource type="Texture2D" uid="uid://dqw8ernbrq733" path="res://Sprites/ağızlıkpickup.png" id="1_irddj"]
+[ext_resource type="Script" uid="uid://f3534cpfya7q" path="res://Scripts/Pickup.gd" id="2_pqc80"]
+[ext_resource type="Script" uid="uid://n42totrt7cqm" path="res://Scripts/JawPickupStats.gd" id="3_irddj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqc80"]
+atlas = ExtResource("1_irddj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6gx7"]
+atlas = ExtResource("1_irddj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyesb"]
+atlas = ExtResource("1_irddj")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mknau"]
+atlas = ExtResource("1_irddj")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kbu3f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqc80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6gx7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyesb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mknau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyesb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r8jfg"]
+size = Vector2(16, 16)
+
+[node name="JawPickup" type="AnimatedSprite2D"]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_kbu3f")
+autoplay = "default"
+frame = 1
+frame_progress = 0.3966426
+script = ExtResource("2_pqc80")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_r8jfg")
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("3_irddj")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
