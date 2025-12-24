@@ -824,6 +824,7 @@ position = Vector2(267, -46)
 position = Vector2(266, -40)
 
 [node name="JawPickup" parent="Modulate/InteriorTileMap" instance=ExtResource("10_rajel")]
+position = Vector2(-128, 16)
 
 [node name="CloudsTileMap" type="TileMap" parent="Modulate"]
 z_index = -4

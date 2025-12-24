@@ -64,7 +64,7 @@ region = Rect2(208, 0, 16, 16)
 atlas = ExtResource("1_4kac2")
 region = Rect2(224, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_wmgqm"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_q7sy3"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -120,11 +120,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r8jfg"]
 size = Vector2(16, 16)
 
-[node name="PotionPickup" type="AnimatedSprite2D"]
+[node name="PotionPickup" type="Node2D"]
+show_behind_parent = true
 position = Vector2(0, -8)
-sprite_frames = SubResource("SpriteFrames_wmgqm")
-autoplay = "default"
 script = ExtResource("2_xa28i")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_q7sy3")
+autoplay = "default"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

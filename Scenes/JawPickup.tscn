@@ -4,25 +4,28 @@
 [ext_resource type="Script" uid="uid://f3534cpfya7q" path="res://Scripts/Pickup.gd" id="2_pqc80"]
 [ext_resource type="Script" uid="uid://n42totrt7cqm" path="res://Scripts/JawPickupStats.gd" id="3_irddj"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pqc80"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_irddj"]
 atlas = ExtResource("1_irddj")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m6gx7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqc80"]
 atlas = ExtResource("1_irddj")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_eyesb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6gx7"]
 atlas = ExtResource("1_irddj")
 region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mknau"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyesb"]
 atlas = ExtResource("1_irddj")
 region = Rect2(48, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_kbu3f"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_mknau"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irddj")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pqc80")
 }, {
@@ -33,10 +36,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_eyesb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mknau")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eyesb")
+"texture": SubResource("AtlasTexture_m6gx7")
 }],
 "loop": true,
 "name": &"default",
@@ -46,13 +46,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r8jfg"]
 size = Vector2(16, 16)
 
-[node name="JawPickup" type="AnimatedSprite2D"]
+[node name="JawPickup" type="Node2D"]
+show_behind_parent = true
 position = Vector2(0, -8)
-sprite_frames = SubResource("SpriteFrames_kbu3f")
-autoplay = "default"
-frame = 1
-frame_progress = 0.3966426
 script = ExtResource("2_pqc80")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mknau")
+autoplay = "default"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

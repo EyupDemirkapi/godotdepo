@@ -4,40 +4,37 @@
 [ext_resource type="Script" uid="uid://f3534cpfya7q" path="res://Scripts/Pickup.gd" id="2_5dd5a"]
 [ext_resource type="Script" uid="uid://dsa6yd2q51jxe" path="res://Scripts/HeartPickupStats.gd" id="3_0btdl"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rtgcg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5dd5a"]
 atlas = ExtResource("1_y8a0t")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5dd5a"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0btdl"]
 atlas = ExtResource("1_y8a0t")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0btdl"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjhtc"]
 atlas = ExtResource("1_y8a0t")
 region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bjhtc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qosha"]
 atlas = ExtResource("1_y8a0t")
 region = Rect2(48, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qosha"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqfd8"]
 atlas = ExtResource("1_y8a0t")
 region = Rect2(64, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cqfd8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_01wme"]
 atlas = ExtResource("1_y8a0t")
 region = Rect2(80, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_01wme"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmgqm"]
 atlas = ExtResource("1_y8a0t")
 region = Rect2(96, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_wmgqm"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_r8jfg"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rtgcg")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5dd5a")
 }, {
@@ -55,6 +52,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_01wme")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmgqm")
 }],
 "loop": true,
 "name": &"default",
@@ -64,11 +64,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r8jfg"]
 size = Vector2(16, 16)
 
-[node name="HeartPickup" type="AnimatedSprite2D"]
+[node name="HeartPickup" type="Node2D"]
+show_behind_parent = true
 position = Vector2(0, -8)
-sprite_frames = SubResource("SpriteFrames_wmgqm")
-autoplay = "default"
 script = ExtResource("2_5dd5a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_r8jfg")
+autoplay = "default"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
